@@ -1,10 +1,10 @@
 package org.example;
 
-import java.util.Scanner;
+import java.util.Arrays;
 
 public class App {
     public static void main(String[] args) {
-        String[] newNames = {"sree dharani", "sreehan reddy", "Avyukth reddy"};
+        String[] newNames = {"sree dharani", "sree reddy", "Avyukth reddy"};
         NameRepository.setNames(newNames);
         System.out.println("Size of names array: " + NameRepository.getSize());
         System.out.println("\nAll names:");
@@ -20,6 +20,13 @@ public class App {
         }
         boolean addednewname = NameRepository.add("rama mohan reddy");
         System.out.println("new name is added  " + addednewname);
+        String[] matchedNames = NameRepository.findByFirstName("sree");
+            System.out.println("name found with firstname  " + Arrays.toString(matchedNames) );
+
+        String[] lastnamematched = NameRepository.findByLastName("reddy");
+        System.out.println("name found with lastname  " + Arrays.toString(lastnamematched) );
+        boolean nameupdate = NameRepository.update("sree dharani","sree reddy");
+        System.out.println("updated name is  " +nameupdate );
 
 
         NameRepository.clear();

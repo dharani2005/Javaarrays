@@ -1,5 +1,6 @@
 package org.example;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class NameRepository {
@@ -42,7 +43,51 @@ public class NameRepository {
         names = newNames;
         return true;
     }
+
+    public static String[] findByFirstName(final String firstname) {
+        String result = "";
+        for (String name : names) {
+            if (name.split(" ")[0].equalsIgnoreCase(firstname)) {
+                result = result + name + ",";
+
+            }
+        }
+        System.out.println(result);
+        return result.split(",");
+
+
+        }
+
+
+
+
+    public static String[] findByLastName(final String lastname) {
+        String result = "";
+        for (String name : names) {
+            if (name.split(" ")[1].equalsIgnoreCase(lastname)) {
+                result = result + name + ",";
+
+            }
+        }
+        return result.split(",");
+
+
+    }
+
+    public static boolean update(final String original, final String updatedname) {
+        for (String element : names) {
+            if (element.equalsIgnoreCase(original)) {
+                String updated = element.replace(original, updatedname);
+                return true;
+            }
+        }
+        return false;
+    }
+
+
 }
+
+
 
 
 
