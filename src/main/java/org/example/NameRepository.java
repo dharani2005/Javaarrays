@@ -1,6 +1,5 @@
 package org.example;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class NameRepository {
@@ -19,6 +18,7 @@ public class NameRepository {
     }
 
     public static String[] findAll() {
+
         return Arrays.copyOf(names, names.length);
     }
 
@@ -56,9 +56,7 @@ public class NameRepository {
         return result.split(",");
 
 
-        }
-
-
+    }
 
 
     public static String[] findByLastName(final String lastname) {
@@ -75,11 +73,31 @@ public class NameRepository {
     }
 
     public static boolean update(final String original, final String updatedname) {
-        for (String element : names) {
-            if (element.equalsIgnoreCase(original)) {
-                String updated = element.replace(original, updatedname);
-                return true;
+        boolean found = false;
+        for (int i = 0; i < names.length; i++) {
+            if (names[i].equalsIgnoreCase(original)) {
+                names[i] = updatedname;
+                found = true;
             }
+        }
+        return found;
+    }
+
+    public static boolean remove(final String fullName) {
+        int index = -1;
+        for (int i = 0; i < names.length; i++) {
+            if (names[i].equals(fullName)) {
+                index = i;
+                break;
+            }
+        }
+
+        if (index != -1) {
+            String[] newArray = new String[names.length - 1];
+            System.arraycopy(names, 0, newArray, 0, index);
+            System.arraycopy(names, index + 1, newArray, index, names.length - index - 1);
+            names = newArray;
+            return true;
         }
         return false;
     }
